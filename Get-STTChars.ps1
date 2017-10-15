@@ -50,18 +50,19 @@ foreach ($rarity in $rarities){
     $chars.Count
     $newchars += $chars
 }
-$olddata = Import-Excel $file
+if (Test-Path $file){
+    $olddata = Import-Excel $file
 
-foreach ($oldchar in $olddata){
-    foreach ($newchar in $newchars){
-        if ($oldchar.name -eq $newchar.name){
-            $newchar | Add-Member –MemberType NoteProperty -Name "Active" -Value $oldchar.Active -Force
-            $newchar | Add-Member –MemberType NoteProperty -Name "Frozen" -Value $oldchar.Frozen -Force
-            $newchar | Add-Member –MemberType NoteProperty -Name "Immortalised" -Value $oldchar.Immortalised -Force
+    foreach ($oldchar in $olddata){
+        foreach ($newchar in $newchars){
+            if ($oldchar.name -eq $newchar.name){
+                $newchar | Add-Member –MemberType NoteProperty -Name "Active" -Value $oldchar.Active -Force
+                $newchar | Add-Member –MemberType NoteProperty -Name "Immortalised" -Value $oldchar.Immortalised -Force
+                $newchar | Add-Member –MemberType NoteProperty -Name "Frozen" -Value $oldchar.Frozen -Force
+            }
         }
-    }
     
+    }
 }
-
 $newchars | Export-Excel $file
 $newchars.Count
