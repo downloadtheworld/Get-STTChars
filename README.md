@@ -7,4 +7,5 @@ This script will write out to a spreadsheet file called STTChars.xlsx in the sam
 
 # Known issues
 No error handling. You might want to backup your STTChars file before re-running the script.
+
 The Link field isn't an actual link but you can work out how to use it.
